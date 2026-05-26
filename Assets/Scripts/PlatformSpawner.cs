@@ -48,6 +48,7 @@ public class PlatformSpawner : MonoBehaviour
     void SpawnObject()
     {
         float ultimaX = 999f;
+
         for (int i = 0; i < cantidadPlataformas; i++) // genera 2 plataformas
         {
             float randomX;
@@ -59,10 +60,12 @@ public class PlatformSpawner : MonoBehaviour
             while (Mathf.Abs(randomX - ultimaX) < separacionMinima); //(Mathf.Abs(randomX) < separacionMinima);
 
             ultimaX = randomX;
-            //float randomX = Random.Range(minX, MasX);
-            Vector2 spawnPosition = new Vector2(randomX, transform.position.y);
+            float randomY = Random.Range(0f, 3f);
 
-            Instantiate(ObjPrefab, spawnPosition, Quaternion.identity);
+            Vector2 spawnPosition = new Vector2(randomX, transform.position.y + randomY);
+
+            Instantiate(DifficultManager.instance.plataformActual, spawnPosition, Quaternion.identity);
+            //Instantiate(ObjPrefab, spawnPosition, Quaternion.identity);
         }
 
     }

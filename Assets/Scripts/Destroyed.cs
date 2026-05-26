@@ -15,7 +15,12 @@ public class Destroyed : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        
+
+        if (other.gameObject.CompareTag("Obstaculo"))
+        {
+            Destroy(other.gameObject);
+        }
+
         if (other.CompareTag("Player"))
         {
             GameOverManager.GameOver();
