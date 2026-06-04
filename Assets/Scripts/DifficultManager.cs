@@ -18,6 +18,8 @@ public class DifficultManager : MonoBehaviour
 
     [SerializeField] GameObject Plataform4;
 
+    public int porcentajeActual;
+    //[SerializeField] GameObject FakePlatform;
     //[Header("Trampas")]
 
     //public GameObject TrampaActual;
@@ -46,8 +48,8 @@ public class DifficultManager : MonoBehaviour
     //[SerializeField] GameObject player4;
     [Header("Alturas")]
 
-    [SerializeField] float height2 = 10.0f;
-    [SerializeField] float height3 = 20.5f;
+    [SerializeField] float height2 = 50.0f;
+    [SerializeField] float height3 = 100.5f;
     //[SerializeField] float AlturaTramp = 30f;
 
      void Awake()
@@ -65,19 +67,31 @@ public class DifficultManager : MonoBehaviour
     {
         while (true) 
         {
+            
             float altura = player.position.y;
             
-            if (altura >= height2)
-            {
-                plataformActual = Plataforma3;
-
-            }
+            //if (altura >= height2)
+            //{
+            //    plataformActual = Plataforma3;
+            //    porcentajeActual = 20;
+            //}
 
             if (altura >= height3)
             {
                 plataformActual = Plataform4;
 
+                porcentajeActual = 50;
                 //TrampaActual = Trampas;
+            }
+            else if (altura >= height2)
+            {
+                plataformActual = Plataforma3;
+                porcentajeActual = 20;
+            }
+            else 
+            {
+                plataformActual = Plataforma2;
+                porcentajeActual = 0;
             }
 
             yield return null;

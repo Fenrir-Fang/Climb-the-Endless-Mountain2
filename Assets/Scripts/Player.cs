@@ -12,23 +12,39 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck;
+    [SerializeField] private AudioClip saltoSonido;
+    [SerializeField] private AudioSource audioSource;
+    private int Djump = 1;
+    private Animator Animator;
+    private float Horizontal;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         move = Input.GetAxisRaw("Horizontal");
         rb2D.velocity = new Vector2(move * speed, rb2D.velocity.y);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        Animator.SetFloat("Speed", Mathf.Abs(move));
+        //Animator.SetBool("running", Horizontal != 0.0f);
+        Animator.SetBool("IsGrounded", isGrounded);
+
+
+        if (isGrounded) 
+        {
+            Djump = 1;
+        }
+
 
         if (move != 0)
         {
-            transform.localScale = new Vector3(Mathf.Sign(move), 1, 1);
+            transform.localScale = new Vector3(Mathf.Sign(move) * Mathf.Abs(transform.localScale.x), transform.localScale.y , transform.localScale.z );
         }
 
         //if (Input.GetButtonDown("Jump") && isGrounded)
@@ -36,13 +52,30 @@ public class Player : MonoBehaviour
         //    rb2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
         //}
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && Djump > 0)//(Input.GetButtonDown("Jump") && isGrounded && Djump > 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
+            Djump--;
+
+            audioSource.PlayOneShot(saltoSonido);
         }
 
 
     }
+
+    //public void Respawn()
+    //{
+    //    transform.position = GameManager.instance.currentCheckpoint;
+    //}
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Floor")) 
+    //    {
+    //        Djump = 2;
+    //    }
+
+    //}
 
     //private void FixedUpdate()
     //{
