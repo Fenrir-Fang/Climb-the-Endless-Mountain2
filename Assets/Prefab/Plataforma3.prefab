@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7545804431630124627}
   - component: {fileID: 1075843298329451386}
   - component: {fileID: 3913765122337601379}
+  - component: {fileID: 1876096685069252578}
   m_Layer: 3
   m_Name: Plataforma3
   m_TagString: Floor
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0800843, y: 0.7965648}
   m_EdgeRadius: 0
+--- !u!114 &1876096685069252578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182066180980986900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401fd66013065d249afbb6655d96aaeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

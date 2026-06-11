@@ -1,0 +1,13 @@
+Cosas para mejorar o agregar en el juego
+
+Mejorar el sistema de Spawn de plataformas, para hacer que no aparezcan tan juntas o mas
+
+Mejorar la dificultad con respecto a los obstáculos o agregar mas
+
+Poder hacer que el escenario cambie a medida que se suba mas e incluso cambiar el soundtrack
+
+arreglar el checkpoint para no caer al vacio en caso de que la plataforma sea borrada
+
+Poner la tiendita para comprar mejoras entre otras cosas
+
+mejorar el sistema de partículas

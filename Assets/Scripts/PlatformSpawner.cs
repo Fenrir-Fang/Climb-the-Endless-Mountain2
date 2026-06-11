@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     [SerializeField] GameObject ObjPrefab;
-    [SerializeField] GameObject FakePlatform;
+    [SerializeField] GameObject PlataformaCabra;
+    [SerializeField] GameObject TierraSuelta;
+    //[SerializeField] GameObject [] FakePlatform;
     [SerializeField] Transform Player;
     [SerializeField] float minX = -8f;
     [SerializeField] float MasX = 8f;
@@ -74,9 +76,16 @@ public class PlatformSpawner : MonoBehaviour
 
             GameObject plataformaGenerada;
 
-            if (random < DifficultManager.instance.porcentajeActual)
+            if (random < DifficultManager.instance.porcentajePlataformaCabra)//(random < DifficultManager.instance.porcentajeActual)
             {
-                plataformaGenerada = FakePlatform;
+                plataformaGenerada = PlataformaCabra;
+                //int indice = Random.Range(0, FakePlatform.Length);
+
+                //plataformaGenerada = FakePlatform[indice];
+            }
+            else if(random < DifficultManager.instance.porcentajePlataformaCabra + DifficultManager.instance.porcentajeTierraSuelta)
+            {
+                plataformaGenerada = TierraSuelta;
             }
             else 
             {

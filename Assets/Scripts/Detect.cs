@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Detect : MonoBehaviour
 {
-    [SerializeField] float radioBusqueda;
+    //[SerializeField] float radioBusqueda;
     [SerializeField] LayerMask jugador;
     [SerializeField] Transform transformJugador;
     [SerializeField] float velocidadMovimiento;
+    [SerializeField] float DeteccionDistancia = 10f;
+    private Vector2 direccion;
     //[SerializeField] float distanciaMaxima;
 
     public EstadoMovimiento estadoActual;
@@ -38,14 +40,25 @@ public class Detect : MonoBehaviour
 
     private void EstadoEsperando() 
     {
-        Collider2D jugadorCollider = Physics2D.OverlapCircle(transform.position, radioBusqueda, jugador);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, DeteccionDistancia, jugador);
 
-        if (jugadorCollider)
+        if (hit.collider != null)
         {
-            transformJugador = jugadorCollider.transform;
-
+            transformJugador = hit.transform;
+            direccion = (transformJugador.position - transform.position).normalized;
             estadoActual = EstadoMovimiento.Siguiendo;
+            //estadoActual = EstadoMovimiento.Siguiendo;
         }
+        //Collider2D jugadorCollider = Physics2D.OverlapCircle(transform.position, radioBusqueda, jugador);
+
+        //if (jugadorCollider)
+        //{
+        //    transformJugador = jugadorCollider.transform;
+
+        //    direccion = (transformJugador.position - transform.position).normalized;
+
+        //    estadoActual = EstadoMovimiento.Siguiendo;
+        //}
     }
 
     private void EstadoSiguiendo() 
@@ -56,12 +69,15 @@ public class Detect : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, transformJugador.position, velocidadMovimiento * Time.deltaTime);
+        transform.position += (Vector3)direccion * velocidadMovimiento * Time.deltaTime;
+
+        //transform.position = Vector2.MoveTowards(transform.position, transformJugador.position, velocidadMovimiento * Time.deltaTime);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radioBusqueda);
+        Gizmos.DrawLine(transform.position, transform.position + -transform.right * DeteccionDistancia);
+        //Gizmos.DrawWireSphere(transform.position, radioBusqueda);
     }
 }

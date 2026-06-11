@@ -19,6 +19,11 @@ public class DifficultManager : MonoBehaviour
     [SerializeField] GameObject Plataform4;
 
     public int porcentajeActual;
+
+    public int dificultad;
+
+    public int porcentajeTierraSuelta;
+    public int porcentajePlataformaCabra;
     //[SerializeField] GameObject FakePlatform;
     //[Header("Trampas")]
 
@@ -78,20 +83,33 @@ public class DifficultManager : MonoBehaviour
 
             if (altura >= height3)
             {
+                //dificultad = 3;
                 plataformActual = Plataform4;
 
                 porcentajeActual = 50;
+
+                porcentajeTierraSuelta = 30;
+                porcentajePlataformaCabra = 20;
                 //TrampaActual = Trampas;
             }
             else if (altura >= height2)
             {
+                //dificultad = 2;
                 plataformActual = Plataforma3;
                 porcentajeActual = 20;
+
+                porcentajeTierraSuelta = 25;
+                porcentajePlataformaCabra = 0;
             }
             else 
             {
+                //dificultad = 1;
                 plataformActual = Plataforma2;
                 porcentajeActual = 0;
+
+                porcentajeTierraSuelta = 0;
+                porcentajePlataformaCabra = 0;
+
             }
 
             yield return null;

@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] private AudioClip saltoSonido;
     [SerializeField] private AudioSource audioSource;
-    private int Djump = 1;
+    [SerializeField] ParticleSystem particulaSalto;
+    private int Djump = 2;
     private Animator Animator;
     private float Horizontal;
 
@@ -38,7 +39,8 @@ public class Player : MonoBehaviour
 
         if (isGrounded) 
         {
-            Djump = 1;
+            Djump = 2;
+            Debug.Log("Salto cargado");
         }
 
 
@@ -52,15 +54,19 @@ public class Player : MonoBehaviour
         //    rb2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
         //}
 
-        if (Input.GetButtonDown("Jump") && Djump > 0)//(Input.GetButtonDown("Jump") && isGrounded && Djump > 0)
+        if (Input.GetKeyDown(KeyCode.Z) && Djump > 0) //(Input.GetButtonDown("Jump") && Djump > 0)//(Input.GetButtonDown("Jump") && isGrounded && Djump > 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
             Djump--;
 
             audioSource.PlayOneShot(saltoSonido);
+            CrearParticulaSalto();
         }
+    }
 
-
+    void CrearParticulaSalto() 
+    {
+        particulaSalto.Play();
     }
 
     //public void Respawn()
